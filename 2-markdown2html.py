@@ -17,18 +17,23 @@ if __name__ == "__main__":
             for line in md_file:
                 if line.split(' ')[0][0] == '#':
                     length = len(line.split(' ')[0])
-                    heading = " ".join(line.split(' ')[1:-1]) +\
-                        line.split(' ')[-1][:-1]
-                    text.append("<h{}>{}</h{}>\n".format(
-                        length, heading, length))
+                    if length < 7:
+                        heading = " ".join(line.split(' ')[1:-1]) +\
+                            line.split(' ')[-1][:-1]
+                        text.append("<h{}>{}</h{}>".format(
+                            length, heading, length))
+                    else:
+                        text.append(line)
                 elif line.split(' ')[0][0] == '-':
                     lista = line.split(' ')[1][:-1]
                     if i == 0:
-                        text.append("<ul>\n<li>{}</li>\n".format(lista))
-                        text.append("</ul>\n")
+                        text.append("<ul>\n<li>{}</li>".format(lista))
+                        text.append("</ul>")
                     else:
-                        text.insert(-2, "<li>{}</li>\n".format(lista))
+                        text.insert(-1, "<li>{}</li>".format(lista))
                     i += 1
+                else:
+                    text.append(line)
 
         with open(sys.argv[2], 'w', encoding='utf-8') as html_file:
-            html_file.write(''.join(text))
+            html_file.write('\n'.join(text)+'\n')
