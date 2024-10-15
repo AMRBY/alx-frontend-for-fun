@@ -2,6 +2,7 @@
 """ markdown to html """
 
 if __name__ == "__main__":
+    """ markdown to html """
 
     import sys
     import os.path
