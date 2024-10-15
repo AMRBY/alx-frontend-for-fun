@@ -17,6 +17,8 @@ if __name__ == "__main__":
             j = 0
             for line in md_file:
                 if line.split(' ')[0][0] == '#':
+                    i = 0
+                    j = 0
                     length = len(line.split(' ')[0])
                     if length < 7:
                         heading = " ".join(line.split(' ')[1:-1]) +\
@@ -26,6 +28,7 @@ if __name__ == "__main__":
                     else:
                         text.append(line)
                 elif line.split(' ')[0][0] == '-':
+                    j = 0
                     lista = line.split(' ')[1][:-1]
                     if i == 0:
                         text.append("<ul>\n<li>{}</li>".format(lista))
@@ -34,6 +37,7 @@ if __name__ == "__main__":
                         text.insert(-1, "<li>{}</li>".format(lista))
                     i += 1
                 elif line.split(' ')[0][0] == '*':
+                    i = 0
                     lista = line.split(' ')[1][:-1]
                     if j == 0:
                         text.append("<ol>\n<li>{}</li>".format(lista))
@@ -41,9 +45,8 @@ if __name__ == "__main__":
                     else:
                         text.insert(-1, "<li>{}</li>".format(lista))
                     j += 1
-
                 else:
-                    text.append(line)
+                    text.append("<p>{}</p>".format(line))
 
         with open(sys.argv[2], 'w', encoding='utf-8') as html_file:
             html_file.write('\n'.join(text)+'\n')
