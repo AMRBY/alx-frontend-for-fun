@@ -15,19 +15,20 @@ if __name__ == "__main__":
         with open(sys.argv[1], encoding='utf-8') as md_file:
             i = 0
             for line in md_file:
-                if i != 0 and line.split(' ')[0][0] != '-': 
+                if i != 0 and line.split(' ')[0][0] != '-':
                     text += "</ul>\n"
                 if line.split(' ')[0][0] == '#':
                     length = len(line.split(' ')[0])
-                    heading = " ".join(line.split(' ')[1:-1]) + line.split(' ')[-1][:-1]
+                    heading = " ".join(line.split(' ')[1:-1]) +\
+                        line.split(' ')[-1][:-1]
                     text += "<h{}>{}</h{}>\n".format(length, heading, length)
                 elif line.split(' ')[0][0] == '-':
-                    lista = line.split(' ')[1][:-1] 
+                    lista = line.split(' ')[1][:-1]
                     if i == 0:
                         text += "<ul>\n<li>{}</li>\n".format(lista)
                     else:
                         text += "<li>{}</li>\n".format(lista)
-                    i += 1;
+                    i += 1
 
         with open(sys.argv[2], 'w', encoding='utf-8') as html_file:
             html_file.write(text)
