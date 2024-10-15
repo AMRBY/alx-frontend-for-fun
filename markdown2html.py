@@ -19,7 +19,5 @@ if __name__ == "__main__":
                     heading = " ".join(line.split(' ')[1:-1]) +\
                         line.split(' ')[-1][:-1]
                     text += "<h{}>{}</h{}>\n".format(length, heading, length)
-                else:
-                    text += line
         with open(sys.argv[2], 'w', encoding='utf-8') as html_file:
             html_file.write(text)
